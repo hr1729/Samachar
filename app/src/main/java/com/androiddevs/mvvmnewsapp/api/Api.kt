@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface services {
     companion object {
-        const val BASE_URL = "https://newsapi.org/v2/"
+        const val BASE_URL = "https://newsapi.org/"
         const val API_KEY="4e6614543e674a66b20e226f3724e18e"
 
     }

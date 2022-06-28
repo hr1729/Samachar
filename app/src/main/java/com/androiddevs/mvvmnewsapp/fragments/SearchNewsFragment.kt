@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.databinding.FragmentSearchNewsBinding
@@ -21,7 +25,7 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
     lateinit var viewmodel:viewModel
     lateinit var binding:FragmentSearchNewsBinding
     lateinit var newsAdapter: newsArticleAdapter
-
+    lateinit var navController: NavController
 
     val TAG = "Serachnewserror"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,6 +33,7 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
         binding= FragmentSearchNewsBinding.bind(view)
         viewmodel=(activity as MainActivity).viewmodel
         newsAdapter= newsArticleAdapter()
+        navController=Navigation.findNavController(view)
         var job: Job? = null
        binding.etSearch.addTextChangedListener { editable ->
             job?.cancel()
@@ -46,6 +51,12 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
                 adapter=newsAdapter
                 layoutManager = LinearLayoutManager(activity)
             }
+        }
+        newsAdapter.setOnItemClickListener {
+            val bundle= Bundle().apply {
+                putSerializable("article",it)
+            }
+            findNavController().navigate(R.id.action_searchNewsFragment_to_articleFragment,bundle)
         }
         viewmodel=(activity as MainActivity).viewmodel
         viewmodel.searchNews.observe(viewLifecycleOwner, Observer {
@@ -72,7 +83,6 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
         binding.paginationProgressBar.visibility = View.INVISIBLE
     }
     private fun showProgressBar() {
-        Toast.makeText(context,"loading", Toast.LENGTH_LONG).show()
         binding.paginationProgressBar.visibility = View.VISIBLE
     }
 }

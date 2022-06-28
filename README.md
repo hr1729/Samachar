@@ -19,7 +19,7 @@ A Simple News App build using Kotlin.in this app there is a HomePage which displ
 
 ## Screenshots
 App Preview        
-:-------------------------:|
+:-------------------------:|:-------------------------:
 ![Screenshot_20220628_190623](https://user-images.githubusercontent.com/65075246/176210120-9578ab39-1cd3-4f00-8e15-30f3ab11ee20.png)
 
 

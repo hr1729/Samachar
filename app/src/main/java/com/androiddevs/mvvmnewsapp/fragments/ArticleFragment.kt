@@ -11,6 +11,7 @@ import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.databinding.FragmentArticleBinding
 import com.androiddevs.mvvmnewsapp.databinding.FragmentSavedNewsBinding
 import com.androiddevs.mvvmnewsapp.shared.newsArticleAdapter
+import com.google.android.material.snackbar.Snackbar
 
 class ArticleFragment() : Fragment(R.layout.fragment_article) {
     lateinit var viewmodel:viewModel
@@ -24,6 +25,12 @@ class ArticleFragment() : Fragment(R.layout.fragment_article) {
         binding.webView.apply {
             webViewClient = WebViewClient()
             loadUrl(article!!.url)
+        }
+        binding.apply {
+            fab.setOnClickListener {
+                viewmodel.ins(article!!)
+                Snackbar.make(view,"Article saved successfully",Snackbar.LENGTH_LONG).show()
+            }
         }
     }
     }

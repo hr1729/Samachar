@@ -19,7 +19,7 @@ class newsArticleAdapter: ListAdapter<Article, newsArticleAdapter.NewsArticleVie
             holder.bind(currentItem)
         }
     }
-    ///
+    /////
    inner  class NewsArticleViewHolder constructor(private val binding: ItemArticlePreviewBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article){
             binding.apply {

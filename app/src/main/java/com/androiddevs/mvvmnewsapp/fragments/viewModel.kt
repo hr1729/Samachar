@@ -3,6 +3,7 @@ package com.androiddevs.mvvmnewsapp.fragments
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.androiddevs.mvvmnewsapp.data.Article
 import com.androiddevs.mvvmnewsapp.data.newsResponse
 import com.androiddevs.mvvmnewsapp.shared.Resource
 import kotlinx.coroutines.launch
@@ -44,5 +45,13 @@ init {
         }
         return Resource.Error(response.message())
     }
+
+    fun ins(article: Article)=viewModelScope.launch {
+       repo.ins(article)
+    }
+    fun del(article: Article)=viewModelScope.launch {
+        repo.del(article)
+    }
+    fun getnews()=repo.getsavednews()
 
 }
